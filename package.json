@@ -1,0 +1,23 @@
+{
+  "name": "Basic-Login-System",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lauramnf/Basic-Login-System.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/lauramnf/Basic-Login-System/issues"
+  },
+  "dependencies": {
+    "express": "~4.17.1",
+    "ejs": "~3.1.5",
+    "bcryptjs": "~2.4.3"
+  }
+}
