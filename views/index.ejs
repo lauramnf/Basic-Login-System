@@ -1,1 +1,21 @@
-<h1>Hi</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Main Page </title>
+  </head>
+  <body>
+    <h1><%= frase%></h1>
+    <div>
+      <% if (login === false){%>
+        <p> Not part of the community yet?</p>
+        <a href="/register">Register here</a>
+        <p> Already part of the community?</p>
+        <a href="/login">Login here</a>
+      <% } else { %>
+        <p> Goodbye?</p>
+        <a href="/login">Logout here</a>
+      <% } %>
+
+    </div>
+  </body>
+</html>

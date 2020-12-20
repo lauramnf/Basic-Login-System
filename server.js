@@ -6,15 +6,20 @@ const app = express()
 
 // users basic alocation
 var users =[]
-
+var user_name = 'Desconhecido'
 // recognizes ejs
 app.set('view-engine', 'ejs')
-// app.use(bodyParser.urlencoded({extended: false}))
+
 app.use(express.urlencoded({ extendend: false }))
 
 // make a get request and render first page
 app.get('/',  (req,res) => {
-  res.render('index.ejs', {name: 'Laura'})
+  if (user_name === 'Desconhecido'){
+    res.render('index.ejs', {frase: 'Opss... Restricted area. Login or register yourself to start!', login: false})
+  }
+  else{
+    res.render('index.ejs', {frase: 'Welcome '+user_name+'!', login: true})
+  }
 })
 
 // make a get request and render regoster page
@@ -52,6 +57,7 @@ app.post('/login', async (req, res) => {
         res.redirect('/login')
       }
       else{
+        user_name = elem['first_name']+' '+elem['last_name']
         res.redirect('/')
       }
       break;
