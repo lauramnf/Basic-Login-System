@@ -1,14 +1,15 @@
 {
-  "name": "Basic-Login-System",
+  "name": "basic-login-system",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lauramnf/Basic-Login-System.git"
+    "url": "git+https://github.com/lauramnf/Basic-Login-System.git"
   },
   "author": "",
   "license": "BSD-2-Clause",
@@ -16,8 +17,17 @@
     "url": "https://github.com/lauramnf/Basic-Login-System/issues"
   },
   "dependencies": {
-    "express": "~4.17.1",
-    "ejs": "~3.1.5",
-    "bcryptjs": "~2.4.3"
+    "alert": "^5.0.8",
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "~2.4.3",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "passport-local": "^1.0.0"
+  },
+  "homepage": "https://github.com/lauramnf/Basic-Login-System#readme",
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.6"
   }
 }
