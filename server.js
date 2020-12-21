@@ -6,23 +6,31 @@ const app = express()
 
 // users basic alocation
 var users =[]
+
+var login = false
 var user_name = 'Desconhecido'
 // recognizes ejs
 app.set('view-engine', 'ejs')
 
 app.use(express.urlencoded({ extendend: false }))
 
-// make a get request and render first page
+function logout (){
+  login = false
+  console.log(login)
+  console.log('Clicked')
+}
+
+// make a get request and render  first page
 app.get('/',  (req,res) => {
-  if (user_name === 'Desconhecido'){
-    res.render('index.ejs', {frase: 'Opss... Restricted area. Login or register yourself to start!', login: false})
+  if (login === false){
+    res.render('index.ejs', {frase: 'Opss... Restricted area. Login or register yourself to start!', login: login})
   }
   else{
-    res.render('index.ejs', {frase: 'Welcome '+user_name+'!', login: true})
+    res.render('index.ejs', {frase: 'Welcome '+user_name+'!', login: login, logout: logout})
   }
 })
 
-// make a get request and render regoster page
+// make a get request and render register page
 app.get('/register',  (req, res) => {
   res.render('register.ejs')
 })
@@ -32,7 +40,7 @@ app.get('/login', (req, res) => {
   res.render('login.ejs')
 })
 
-// get peoples login information in a secure way
+// get peoples register information in a secure way
 app.post('/register', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10) //hash password, so it can be stored in safety
   users.push({
@@ -57,6 +65,7 @@ app.post('/login', async (req, res) => {
         res.redirect('/login')
       }
       else{
+        login = true
         user_name = elem['first_name']+' '+elem['last_name']
         res.redirect('/')
       }
