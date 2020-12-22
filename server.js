@@ -6,7 +6,6 @@ const app = express()
 
 // users basic alocation
 var users =[]
-
 var login = false
 var user_name = 'Desconhecido'
 // recognizes ejs
@@ -16,8 +15,8 @@ app.use(express.urlencoded({ extendend: false }))
 
 function logout (){
   login = false
-  console.log(login)
-  console.log('Clicked')
+  // console.log(login)
+  // console.log('Clicked')
 }
 
 // make a get request and render  first page
@@ -43,14 +42,25 @@ app.get('/login', (req, res) => {
 // get peoples register information in a secure way
 app.post('/register', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10) //hash password, so it can be stored in safety
-  users.push({
-    first_name: req.body.fname,
-    last_name: req.body.lname,
-    email: req.body.email,
-    username: req.body.username,
-    password: hashedPassword
-  })
-  res.redirect('/login')
+  var username_valido = true
+  for (user of users){
+    if (req.body.username === user['username']){ //check if it is a valid username
+      username_valido = false
+      alert('Username already used')
+      res.redirect('/register')
+      break
+    }
+  }
+  if (username_valido === true){
+    users.push({
+      first_name: req.body.fname,
+      last_name: req.body.lname,
+      email: req.body.email,
+      username: req.body.username,
+      password: hashedPassword
+    })
+    res.redirect('/login')
+  }
 })
 
 // route HTTP POST request to login page
@@ -61,7 +71,7 @@ app.post('/login', async (req, res) => {
       user_valido = true
       const valid_password = await bcrypt.compare(req.body.password, elem['password']) // check if the passwords match
       if(!valid_password){
-        alert('Senha incorreta')
+        alert('Incorrect password')
         res.redirect('/login')
       }
       else{
@@ -73,7 +83,7 @@ app.post('/login', async (req, res) => {
     }
   }
   if (user_valido === false){
-    alert('Usuário inexistente')
+    alert('User does not exist')
     res.redirect('/login')
   }
 })
