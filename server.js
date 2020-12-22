@@ -12,6 +12,7 @@ var user_name = 'Desconhecido'
 app.set('view-engine', 'ejs')
 
 app.use(express.urlencoded({ extendend: false }))
+app.use('/public', express.static('public')) //using css template
 
 function logout (){
   login = false
